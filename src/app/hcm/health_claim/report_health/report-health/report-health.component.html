@@ -1,0 +1,110 @@
+<div class="row text-left">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="px-3" [ngStyle]="{'margin':'10px 0px 20px 0px'}">
+  
+            <h4 style="color: #343a40;
+              line-height: 3rem;
+              font-size: 1.2rem;
+              letter-spacing: 0.5px;
+              font-weight: 400;
+              margin-bottom: 20px;
+              border-bottom: 1px solid #343a40;"><i class="ft-file-text"></i>Health Claim</h4>
+            <kendo-grid
+                    [data]="view | async"
+                    [loading]="view['loading']"
+                    [pageSize]="state.take"
+                    [skip]="state.skip"
+                    [sort]="state.sort"
+                    [sortable]="{mode: 'multiple'}"
+                    [height]="630"
+                    [filter]="state.filter"
+                    [filterable]="true" 
+                    [columnMenu]="{filter: true}"
+                    [pageable]="{
+                                  buttonCount: 8,
+                                  info: true,
+                                  type: 'numeric',
+                                  pageSizes: [5, 15, 25],
+                                  previousNext: true
+                                }"
+                    (dataStateChange)="dataStateChange($event)"
+                    (edit)="editHandler($event)"
+                    (add)="addHandler($event)"
+            >
+              <ng-template kendoGridToolbarTemplate>
+                <button [icon]="'plus'" kendoGridAddCommand>Add new</button>
+                <button class="k-button" (click)="refreshGrid()">Refresh</button>
+              </ng-template>
+  
+              <kendo-grid-column
+                      *ngFor="let column of label"
+                      field="{{column.label_value}}"
+                      title="{{column.label_name}}"
+                      [hidden]="getBooleanTrueFalse(column.active_field)"
+                      width="150"
+              ></kendo-grid-column>
+              <kendo-grid-column field="nik_health" title="NIK" [width]="150"
+                    [class]="{'text-center': true}"
+                    [resizable]="false">
+            </kendo-grid-column>
+            <kendo-grid-column field="id_keluarga" title="ID Keluarga" [width]="150"
+                    [class]="{'text-center': true}"
+                    [resizable]="false">
+            </kendo-grid-column>
+            <kendo-grid-column field="nama_pegawai" title="Nama" width="150">
+            </kendo-grid-column>
+            <kendo-grid-column field="divisi" title="Divisi" width="150">
+            </kendo-grid-column>
+            <kendo-grid-column field="hasil_checkup" title="Hasil Check" [width]="150"
+                    [class]="{'text-center': true}"
+                    [resizable]="false">
+            </kendo-grid-column>
+            <kendo-grid-column field="tgl_claim" title="Tanggal" [width]="150"
+                    [class]="{'text-center': true}"
+                    [resizable]="false">
+            </kendo-grid-column>
+            <kendo-grid-column field="biaya_claim" title="Biaya" width="150">
+            </kendo-grid-column>
+            <kendo-grid-column field="bukti_claim" title="Bukti" width="150">
+            </kendo-grid-column>
+              <kendo-grid-column
+                    field="status_claim"
+                    title="Status"
+                    [width]="150"
+                    [class]="{'text-center': true}"
+                    [resizable]="false"
+                    filter="boolean"
+                >
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        <span *ngIf="dataItem.status_claim === true" class="badge badge-success">approved</span>
+                        <span *ngIf="dataItem.status_claim === false" class="badge badge-danger">on progress</span>
+                    </ng-template>
+                </kendo-grid-column>
+              <kendo-grid-command-column title="Action" width="220">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  <button kendoGridRemoveCommand *ngIf="dataItem.id" [iconClass]="'fa fa-edit fa-fw'" (click)="editHandler(dataItem)">Detail</button>
+                  <button kendoGridRemoveCommand *ngIf="dataItem.id" [iconClass]="'fa fa-trash fa-fw'" [primary]="true" [look]="'outline'" (click)="removeHandler(dataItem.id)">Delete</button>
+                </ng-template>
+              </kendo-grid-command-column>
+  
+              <kendo-grid-excel fileName="Data Level 1.xlsx"></kendo-grid-excel>
+              <!--div style="text-align: "></div-->
+            </kendo-grid>
+            <app-edit-health
+                    [model]="editDataItem"
+                    [isNew]="isNew"
+                    [active]="active"
+                    [urledit]="url"
+                    (save)="saveHandler($event)"
+                    (cancel)="cancelHandler($event)"
+                    (refresh)="refreshGrid()"
+                    (setaktif)="setActive($event)"
+                    (setisnew)="setIsNew($event)">
+            </app-edit-health>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

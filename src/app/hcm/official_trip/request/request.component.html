@@ -1,0 +1,67 @@
+<section id="konten">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Request SPPD</h3>
+                </div>
+                <div class="card-body">
+                    <form novalidate [formGroup]="editForm">
+                        <div class="row">
+                            <div  class="col-md-6" style="margin-top: 10px">
+                                <span class="text-bold-500 primary"><a><i class="ft-book font-small-3"></i> NIP :</a></span><br/>
+                                <input kendoTextBox formControlName="nip" style="width: 100%;"/>
+                                <input type="hidden" formControlName="id" [ngModel]="8">
+                                <input type="hidden" formControlName="kode_sppd" [ngModel]="kode">
+                                <input type="hidden" formControlName="tujuan_perjalanan" [ngModel]="2">
+                                <input type="hidden" formControlName="status" [ngModel]="1">
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <!-- =========================== -->
+                                    <div  class="col-md-6" style="margin-top: 10px">
+                                        <span class="text-bold-500 primary"><a><i class="icon-present font-small-3"></i> Tanggal Berangkat</a></span><br/>
+                                        <kendo-datepicker
+                                            formControlName="tgl_berangkat"
+                                            [format]="'dd MMM yyyy'"
+                                            style="width: 100%;"
+                                            ></kendo-datepicker>
+                                    </div>
+                                    <div  class="col-md-6" style="margin-top: 10px">
+                                        <span class="text-bold-500 primary"><a><i class="icon-present font-small-3"></i> Tanggal Selesai</a></span><br/>
+                                        <kendo-datepicker
+                                            formControlName="tgl_selesai"
+                                            [format]="'dd MMM yyyy'"
+                                            style="width: 100%;"
+                                            ></kendo-datepicker>
+                                    </div>
+                                    <!-- =========================== -->
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="row">
+                            <div class="col-md-6" style="margin-top: 10px">
+                                <span class="text-bold-500 primary"><a><i class="ft-globe font-small-3"></i> Keterangan Perjalanan </a></span><br/>
+                                <textarea kendoTextArea formControlName="keterangan" style="width: 100%;"></textarea>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="row">
+                        <div class="col-md-6" style="margin-top: 10px;">
+                            <button kendoButton [primary]="true" (click)="onSave($event)">Submit</button>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- aksi disable [disabled]="disableEdit" -->
+<!-- set value [ngModel]="dataEdit[0].bpjs_ket" -->
+

@@ -1,0 +1,90 @@
+
+<!--app-um-main-edit [model]="editDataItem" [isNew]="isNew" [active]="active" (save)="saveHandler($event)" (cancel)="cancelHandler()"></app-um-main-edit-->
+
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3" [ngStyle]="{'margin':'10px 0px 20px 0px'}">
+          <h4 style="color: #343a40;
+            line-height: 3rem;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #343a40;"><i class="ft-file-text"></i> Unit Master</h4>
+          <kendo-grid
+                  [data]="view | async"
+                  [loading]="view.loading"
+                  [pageSize]="state.take"
+                  [skip]="state.skip"
+                  [sort]="state.sort"
+                  [sortable]="{mode: 'multiple'}"
+                  [height]="630"
+                  [filter]="state.filter"
+                  [columnMenu]="{
+        filter: true
+        }"
+                  [pageable]="{
+          buttonCount: 8,
+          info: true,
+          type: 'numeric',
+          pageSizes: [5, 15, 25],
+          previousNext: true
+        }"
+                  (dataStateChange)="dataStateChange($event)"
+                  (edit)="editHandler($event)"
+                  (remove)="removeHandler($event)"
+                  (add)="addHandler($event)"
+          >
+            <ng-template kendoGridToolbarTemplate>
+              <button kendoGridAddCommand>Add new</button>
+              <button type="button" kendoGridExcelCommand icon="file-excel">Export to Excel</button>
+            </ng-template>
+            <kendo-grid-column field="id_mast_unit" title="ID" width="130"></kendo-grid-column>
+            <kendo-grid-column field="nama_master_unit" title="Nama Master Unit" width="200"></kendo-grid-column>
+            <kendo-grid-column field="level_total" width="200" title="Level" [sortable]="false">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                {{listText(dataItem.level_total)?.text}}
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="release_date" title="Release Date" width="200"></kendo-grid-column>
+            <kendo-grid-column field="status_enable" width="200" title="Default" [sortable]="false" filter="boolean">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <img src="assets/img/hcm/star-default.png" *ngIf="dataItem.status_enable" width="20px" height="20px" style="
+                  display: block;
+                  margin-left: auto;
+                  margin-right: auto;">
+                <div style="
+                  width: 110px;
+                  margin-left: auto;
+                  margin-right: auto;">
+                <button kendoButton [primary]="true" *ngIf="!dataItem.status_enable && dataItem.status_release" (click)="setDefault(dataItem.id_mast_unit)">Set to Default</button>
+                </div>
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-command-column title="command" width="220">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <button kendoButton *ngIf="!dataItem.status_release" style="color: white;background-color: #56C5B4;background-image: none" (click)="setRelease(dataItem.id_mast_unit)">Release</button>
+                <button kendoGridEditCommand *ngIf="!dataItem.status_release" [primary]="true" (click)="editHandler(dataItem)">Edit</button>
+                <button kendoGridRemoveCommand *ngIf="!dataItem.status_release" (click)="removeHandler(dataItem.id_mast_unit)">Delete</button>
+                  <button kendoGridEditCommand *ngIf="dataItem.status_release" [primary]="true" (click)="previewHandler(dataItem.id_mast_unit, dataItem.level_total)">Preview</button>
+              </ng-template>
+            </kendo-grid-command-column>
+
+            <kendo-grid-excel fileName="Data Jabatan.xlsx"></kendo-grid-excel>
+            <!--div style="text-align: "></div-->
+          </kendo-grid>
+          <app-um-main-edit
+                  [model]="editDataItem"
+                  [isNew]="isNew"
+                  [active]="active"
+                  [urledit]="url"
+                  (save)="saveHandler($event)"
+                  (cancel)="cancelHandler()">
+          </app-um-main-edit>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

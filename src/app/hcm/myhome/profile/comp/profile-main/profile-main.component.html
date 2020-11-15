@@ -1,0 +1,90 @@
+<div class="row text-left">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="px-3" [ngStyle]="{'margin':'10px 0px 20px 0px'}">
+  
+            <h3 style="color: #013b75;
+            line-height: 3rem;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #343a40;"><i class="fa fa-medkit fa-fw"></i><b> Health Claims </b>
+            
+          </h3>
+            <kendo-grid
+              [data]="view | async"
+              [loading]="view['loading']"
+              [pageSize]="state.take"
+              [skip]="state.skip"
+              [sort]="state.sort"
+              [sortable]="{mode: 'multiple'}"
+              [height]="630"
+              [filter]="state.filter"
+              [filterable]="false" 
+              [columnMenu]="{filter: true}"
+              [pageable]="{
+                            buttonCount: 8,
+                            info: true,
+                            type: 'numeric',
+                            pageSizes: [5, 15, 25],
+                            previousNext: true
+                          }"
+              (dataStateChange)="dataStateChange($event)"
+              (edit)="editHandler($event)"
+              (add)="addHandler($event)"
+            >
+              <ng-template kendoGridToolbarTemplate>
+                <button [icon]="'plus'" kendoGridAddCommand>Add new</button>
+                <button class="k-button" (click)="refreshGrid()">Refresh</button>
+              </ng-template>
+              <!-- <div *ngFor="let color of idkel; index as i">
+                <h2>{{i+1}} {{color}} </h2>
+              </div> -->
+              <kendo-grid-column
+                      *ngFor="let column of label"
+                      field="{{column.label_value}}"
+                      title="{{column.label_name}}"
+                      [hidden]="getBooleanTrueFalse(column.active_field)"
+                      width="150"
+              ></kendo-grid-column>
+              <kendo-grid-column
+                    field="status_claim"
+                    title="Status"
+                    [width]="150"
+                    [class]="{'text-center': true}"
+                    [resizable]="false"
+                    filter="boolean"
+                >
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        <span *ngIf="dataItem.status_claim === true" class="badge badge-success">approved</span>
+                        <span *ngIf="dataItem.status_claim === false" class="badge badge-danger">on progress</span>
+                    </ng-template>
+                </kendo-grid-column>
+              <kendo-grid-command-column title="Action" width="220">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  <button kendoGridRemoveCommand *ngIf="dataItem.id" [look]="'outline'" [iconClass]="'fa fa-edit fa-fw'" (click)="editHandler(dataItem)">Detail</button>
+                  <button kendoGridRemoveCommand *ngIf="dataItem.id" [iconClass]="'fa fa-trash fa-fw'" [primary]="true" [look]="'outline'" (click)="removeHandler(dataItem.id)">Delete</button>
+                </ng-template>
+              </kendo-grid-command-column>
+              
+              <kendo-grid-excel fileName="Data Level 1.xlsx"></kendo-grid-excel>
+              <!--div style="text-align: "></div-->
+            </kendo-grid>
+            <app-profile-edit
+                    [model]="editDataItem"
+                    [isNew]="isNew"
+                    [active]="active"
+                    [urledit]="url"
+                    (save)="saveHandler($event)"
+                    (cancel)="cancelHandler($event)"
+                    (refresh)="refreshGrid()"
+                    (setaktif)="setActive($event)"
+                    (setisnew)="setIsNew($event)">
+            </app-profile-edit>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

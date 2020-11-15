@@ -1,0 +1,71 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3" [ngStyle]="{'margin':'10px 0px 20px 0px'}">
+
+          <h4 style="color: #343a40;
+            line-height: 1rem;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #343a40;">
+          <div class="row" style="height: 30px">
+            <div class="col-xl-8">
+              <i class="ft-file-text"></i>{{fieldName}} Master Level
+            </div>
+            <div class="col-xl-4">
+              <div style="display: inline-block;float: right;">
+                <a href="javascript:void(0)" class="btn btn-flat btn-primary" style="margin-top: 0px;" (click)="goBack()"><i class="ft-chevron-left"></i>
+                  Back</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12">
+              <div style="font-size: 12px" >
+                <div *ngFor="let urlDet of queryParams.path" style="float: left">
+                  <a href="javascript:void(0)" (click)="navigateTo(urlDet.url)">{{urlDet.name}}</a> >
+                </div>
+                <a href="javascript:void(0)" >{{fieldName}} Master Level</a>
+              </div>
+            </div>
+          </div>
+
+          </h4>
+            <kendo-tabstrip [keepTabContent]="false">
+              <kendo-tabstrip-tab [title]="nama_level1" [selected]="true" *ngIf="getStatusLevel(1)">
+                <ng-template kendoTabContent *appTabstripLoad>
+                  <app-um-level1
+                  [parameterUrl]="parameter"
+                  ></app-um-level1>
+                </ng-template>
+              </kendo-tabstrip-tab>
+              <kendo-tabstrip-tab [title]="nama_level2" *ngIf="getStatusLevel(2)">
+                <ng-template kendoTabContent *appTabstripLoad>
+                  <app-um-level2
+                          [parameterUrl]="parameter"
+                  ></app-um-level2>
+                </ng-template>
+              </kendo-tabstrip-tab>
+              <kendo-tabstrip-tab [title]="nama_level3" *ngIf="getStatusLevel(3)">
+                <ng-template kendoTabContent *appTabstripLoad>
+                  <app-um-level3
+                          [parameterUrl]="parameter"
+                  ></app-um-level3>
+                </ng-template>
+              </kendo-tabstrip-tab>
+              <kendo-tabstrip-tab [title]="nama_level4" *ngIf="getStatusLevel(4)">
+                <ng-template kendoTabContent *appTabstripLoad>
+                  <app-um-level3
+                          [parameterUrl]="parameter"
+                  ></app-um-level3>
+                </ng-template>
+              </kendo-tabstrip-tab>
+            </kendo-tabstrip>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

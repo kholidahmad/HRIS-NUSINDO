@@ -1,0 +1,70 @@
+
+<!--app-unit-master-edit [model]="editDataItem" [isNew]="isNew" [active]="active" (save)="saveHandler($event)" (cancel)="cancelHandler()"></app-unit-master-edit-->
+
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3" [ngStyle]="{'margin':'10px 0px 20px 0px'}">
+          <!--h4 style="color: #343a40;
+            line-height: 3rem;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #343a40;"><i class="ft-file-text"></i>Level 3</h4-->
+          <kendo-grid
+                  [data]="view | async"
+                  [loading]="view['loading']"
+                  [pageSize]="state.take"
+                  [skip]="state.skip"
+                  [sort]="state.sort"
+                  [sortable]="{mode: 'multiple'}"
+                  [height]="630"
+                  [filter]="state.filter"
+                  [columnMenu]="{
+        filter: true
+        }"
+                  [pageable]="{
+          buttonCount: 8,
+          info: true,
+          type: 'numeric',
+          pageSizes: [5, 15, 25],
+          previousNext: true
+        }"
+                  (dataStateChange)="dataStateChange($event)"
+                  (edit)="editHandler($event)"
+                  (remove)="removeHandler($event)"
+                  (add)="addHandler($event)"
+          >
+            <ng-template kendoGridToolbarTemplate>
+              <button kendoGridAddCommand>Add new</button>
+              <button type="button" kendoGridExcelCommand icon="file-excel">Export to Excel</button>
+            </ng-template>
+            <kendo-grid-column field="id_level3" title="ID" width="130"></kendo-grid-column>
+            <kendo-grid-column field="nama_lv2" title="Level 2" width="200"></kendo-grid-column>
+            <kendo-grid-column field="nama_lv3" title="Nama Lv3" width="200"></kendo-grid-column>
+            <kendo-grid-command-column title="command" width="220">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <button kendoButton *ngIf="!dataItem.status_release_lv3" style="color: white;background-color: #56C5B4;background-image: none" (click)="setRelease(dataItem.id_level3)">Release</button>
+                <button kendoGridEditCommand *ngIf="!dataItem.status_release_lv3" [primary]="true" (click)="editHandler(dataItem)">Edit</button>
+                <button kendoGridRemoveCommand *ngIf="!dataItem.status_release_lv3" (click)="removeHandler(dataItem.id_level3)">Delete</button>
+              </ng-template>
+            </kendo-grid-command-column>
+
+            <kendo-grid-excel fileName="Data Unit Level 3.xlsx"></kendo-grid-excel>
+            <!--div style="text-align: "></div-->
+          </kendo-grid>
+          <app-um-level3-edit
+                  [model]="editDataItem"
+                  [isNew]="isNew"
+                  [active]="active"
+                  [urledit]="url"
+                  (save)="saveHandler($event)"
+                  (cancel)="cancelHandler($event)">
+          </app-um-level3-edit>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

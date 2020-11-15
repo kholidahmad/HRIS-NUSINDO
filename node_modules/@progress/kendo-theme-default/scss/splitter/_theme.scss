@@ -1,0 +1,26 @@
+@include exports("splitter/theme") {
+
+    .k-splitter {}
+
+    // Splitbar
+    .k-splitbar {
+        color: $splitter-text;
+        background-color: $splitter-bg;
+
+        &:active,
+        &.k-state-focused {
+            color: $splitter-selected-text;
+            background: $splitter-selected-bg;
+        }
+    }
+    .k-splitbar-horizontal-hover,
+    .k-splitbar-vertical-hover {
+        color: $splitter-hovered-text;
+        background-color: $splitter-hovered-bg;
+    }
+
+    .k-ghost-splitbar {
+        background-color: $splitter-hovered-bg;
+    }
+
+}

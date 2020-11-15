@@ -1,0 +1,85 @@
+<section id="konten">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3><b> Request HEALTH CLAIM</b></h3>
+                </div>
+                <div class="card-body ">
+                    <form novalidate [formGroup]="editForm">
+                        <div class="row">
+                            <div  class="col-md-6" style="margin-top: 10px">
+                                <span class="text-bold-500 "> NIK Health :</span>
+                                <input kendoTextBox formControlName="nik_health" style="width: 100%;"/>
+                                <!-- <input type="hidden" formControlName="kode_sppd" [ngModel]="kode">
+                                <input type="hidden" formControlName="tujuan_perjalanan" [ngModel]="2">
+                                <input type="hidden" formControlName="status" [ngModel]="1"> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div  class="col-md-6" style="margin-top: 10px">
+                                <span class="text-bold-500 "><a> ID Keluarga :</a></span>
+                                <input kendoTextBox formControlName="id_keluarga" style="width: 100%;"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div  class="col-md-6" style="margin-top: 10px">
+                                <span class="text-bold-500 "><a> Nama :</a></span>
+                                <input kendoTextBox formControlName="nama_pegawai" style="width: 100%;"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div  class="col-md-6" style="margin-top: 10px">
+                                <span class="text-bold-500 "><a> divisi :</a></span>
+                                <input kendoTextBox formControlName="divisi" style="width: 100%;"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div  class="col-md-6" style="margin-top: 10px">
+                                <span class="text-bold-500 "><a> Hasil Check :</a></span>
+                                <input kendoTextBox formControlName="hasil_checkup" style="width: 100%;"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div  class="col-md-6" style="margin-top: 10px">
+                                <span class="text-bold-500 "><a> Tanggal Claim</a></span>
+                                <kendo-datepicker
+                                    formControlName="tgl_claim"
+                                    [format]="'dd MMM yyyy'"
+                                    style="width: 100%;"
+                                    ></kendo-datepicker>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div  class="col-md-6" style="margin-top: 10px">
+                                <span class="text-bold-500 "><a> Biaya :</a></span>
+                                <input kendoTextBox formControlName="biaya_claim" style="width: 100%;"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div  class="col-md-6" style="margin-top: 10px">
+                                <span class="text-bold-500 "><a> Bukti :</a></span>
+                                <input type="file" kendoTextBox formControlName="bukti_claim" style="width: 100%;"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div  class="col-md-6" style="margin-top: 10px">
+                                <input hidden kendoTextBox formControlName="status_claim" [ngModel]="false"/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-md-6" style="margin-top: 10px;">
+                            <button kendoButton [primary]="true" (click)="onSave($event)">Submit</button>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- aksi disable [disabled]="disableEdit" -->
+<!-- set value [ngModel]="dataEdit[0].bpjs_ket" -->
+

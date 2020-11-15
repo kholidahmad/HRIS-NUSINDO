@@ -1,0 +1,7 @@
+<kendo-dialog title="Upload Photo" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450">
+  <kendo-upload
+          [saveUrl]="uploadSaveUrl"
+          [removeUrl]="uploadRemoveUrl">
+  </kendo-upload>
+
+</kendo-dialog>

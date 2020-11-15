@@ -1,0 +1,57 @@
+
+<!--app-um-main-edit [model]="editDataItem" [isNew]="isNew" [active]="active" (save)="saveHandler($event)" (cancel)="cancelHandler()"></app-um-main-edit-->
+
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="px-3" [ngStyle]="{'margin':'10px 0px 20px 0px'}">
+          <h4 style="color: #343a40;
+            line-height: 3rem;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #343a40;"><i class="ft-file-text"></i>Master Type</h4>
+          <kendo-grid
+                  [data]="view | async"
+                  [loading]="view['loading']"
+                  [pageSize]="state.take"
+                  [skip]="state.skip"
+                  [sort]="state.sort"
+                  [sortable]="{mode: 'multiple'}"
+                  [height]="630"
+                  [filter]="state.filter"
+                  [columnMenu]="{
+        filter: true
+        }"
+                  [pageable]="{
+          buttonCount: 8,
+          info: true,
+          type: 'numeric',
+          pageSizes: [5, 15, 25],
+          previousNext: true
+        }"
+                  (dataStateChange)="dataStateChange($event)"
+          >
+            <ng-template kendoGridToolbarTemplate>
+              <button kendoGridAddCommand>Add new</button>
+              <button type="button" kendoGridExcelCommand icon="file-excel">Export to Excel</button>
+            </ng-template>
+            <kendo-grid-column field="id_master_type" title="ID" width="130"></kendo-grid-column>
+            <kendo-grid-column field="master_type_name" title="Jenis Master" width="200"></kendo-grid-column>
+
+            <kendo-grid-command-column title="command" width="220">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <button kendoGridEditCommand [primary]="true" (click)="previewHandler(dataItem.id_master_type, dataItem.master_type_name)">Preview</button>
+              </ng-template>
+            </kendo-grid-command-column>
+
+            <kendo-grid-excel fileName="Data Jenis Master.xlsx"></kendo-grid-excel>
+            <!--div style="text-align: "></div-->
+          </kendo-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

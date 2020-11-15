@@ -1,0 +1,93 @@
+<kendo-dialog *ngIf="active" (close)="onCancel()">
+    <kendo-dialog-titlebar>
+      {{ isNew ? 'Add Health Claim' : 'Approve Health Claim' }}
+      <!-- Add Health Claim -->
+    </kendo-dialog-titlebar>
+  
+    <form novalidate [formGroup]="editForm">
+  
+      <!-- <div class="form-group" >
+        <label for="nik" *ngIf="isNew" class="" >ID</label>
+        <input type="text" *ngIf="isNew" class="k-textbox" formControlName="id" style="width: 100%"/>
+        <input type="hidden" *ngIf="!isNew" class="k-textbox" formControlName="id" style="width: 100%"/>
+      </div> -->
+      
+      <div class="container d-flex justify-content-between">
+        <div class="col-6 ">
+          <div *ngIf="isNew" class="form-group" >
+            <label for="invoice" class="" >Invoice </label>
+            <input *ngIf="isNew" type="text" class="k-textbox" formControlName="invoice" style="width: 100%" [ngModel]="invoice" />
+            
+          </div>
+          <div class="form-group" >
+            <label for="nik" class="" >NIK</label>
+            <input type="text" class="k-textbox" formControlName="nik_health" style="width: 100%"/>
+          </div>
+          <div class="form-group" >
+            <label for="nik" class="" >ID Kel</label>
+            <input type="text" class="k-textbox" formControlName="id_keluarga" style="width: 100%"/>
+          </div>
+          <div class="form-group" >
+            <label for="name" class="" >Nama Pegawai</label>
+            <input type="text" class="k-textbox" formControlName="nama_pegawai" style="width: 100%"/>
+          </div>
+          <div class="form-group" >
+            <label for="divisi" class="" >Divisi</label><br>
+            <input type="text" class="k-textbox" formControlName="divisi" style="width: 100%"/>
+          </div>
+          <div class="form-group" >
+            <label for="keterangan" class="" >Keterangan</label><br>
+            <input type="text" class="k-textbox" formControlName="keterangan" style="width: 100%"/>
+          </div>
+        </div>
+        <div class="col-6 ">
+          <div *ngIf="isNew" class="form-group" >
+          <label for="tgl_claim" class="" >Tgl Claim</label><br>
+          <input type="text" class="k-textbox" formControlName="tgl_claim" style="width: 100%"/>
+            <!-- <kendo-datepicker
+                formControlName="tgl_claim"
+                [(tgl)]="tgl"
+            ></kendo-datepicker> -->
+          </div>
+          <!-- <div *ngIf="!isNew" class="form-group" >
+          <label for="tgl_claim" class="" >Tgl Claim : </label><br>
+            {{tgl | kendoDate:'MM/dd/yyyy'}}
+          </div> -->
+          <div class="form-group" >
+            <label for="biaya_claim" class="" >Biaya Claim</label><br>
+            <input type="text" class="k-textbox" formControlName="biaya_claim" style="width: 100%"/>
+          </div>
+          <div class="form-group" >
+            <label for="bukti_claim" class="" >Bukti Claim</label><br>
+            <input type="text" class="k-textbox" formControlName="bukti_claim" style="width: 100%"/>
+          </div>
+          <div class="form-group" >
+            <label *ngIf="!isNew" for="status_emp" class="" >Status Claim</label><br>
+            <input *ngIf="!isNew" type="text" class="k-textbox" formControlName="status_claim" style="width: 100%"/>
+
+            <input *ngIf="isNew" type="hidden" class="k-textbox" formControlName="status_claim" [ngModel]="false" style="width: 100%"/>
+             
+          </div>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+          <div class="form-group">
+            <div style="width: 500px; margin: 0 auto;">
+              <button kendoButton [primary]="true" *ngIf="isNew" (click)="onSave()" style="margin-right: 5px;width: 100px">Save</button>
+              <button kendoButton [primary]="true" *ngIf="!isNew" (click)="onUpdate()" style="margin-right: 5px;width: 100px">Update</button>
+              <button kendoButton style="width: 100px" (click)="onCancel()">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+    </form>
+  
+    <!-- <div *ngFor="let d of editForm; index as i">
+                        <span *ngIf="d.status_claim === true" class="badge badge-success">approved</span>
+                        <span *ngIf="d.status_claim === false" class="badge badge-danger">on progress</span>
+                    </div> -->
+    <!--kendo-dialog-actions>
+        <button class="k-button" (click)="onCancel($event)">Cancel</button>
+        <button class="k-button k-primary" [disabled]="!editForm.valid" (click)="onSave($event)">Save</button>
+    </kendo-dialog-actions-->
+</kendo-dialog>

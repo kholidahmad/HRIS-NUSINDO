@@ -1,0 +1,64 @@
+<kendo-dialog *ngIf="active" (close)="closeForm()">
+  <kendo-dialog-titlebar>
+    {{ isNew ? 'Add new Master' : 'Edit Master' }}
+  </kendo-dialog-titlebar>
+
+  <form novalidate [formGroup]="editForm">
+
+      <!--div class="col-md-6">
+        <div class="form-group" >
+          <label for="id_master_unit" class="control-label">ID Master Unit</label>
+          <input type="text" class="k-textbox" formControlName="id_master_unit" />
+        </div>
+      </div-->
+
+        <div class="form-group" >
+          <label for="nama_master" class="" >Nama Master</label>
+          <input type="text" class="k-textbox" formControlName="nama_master" style="width: 100%"/>
+        </div>
+
+        <div class="form-group" >
+          <label for="level_total" class="control-label">Level Total</label>
+
+          <kendo-dropdownlist [formControlName]="'level_total'"
+                              [data]="listTotLevel"
+                              [textField]="'text'"
+                              [valueField]="'value'"
+                              [valuePrimitive]="true"
+                              style="width: 100%"
+                              (valueChange)="hideInput()"
+          >
+          </kendo-dropdownlist>
+        </div>
+
+        <div class="form-group" >
+          <label for="level1" class="" >Nama Level 1</label>
+          <input type="text" class="k-textbox" formControlName="nama_level1" style="width: 100%"/>
+        </div>
+        <div class="form-group" >
+          <label for="level2" class="" >Nama Level 2</label>
+          <input type="text" class="k-textbox"  formControlName="nama_level2" style="width: 100%"/>
+        </div>
+        <div class="form-group">
+          <label for="level3" class="" >Nama Level 3</label>
+          <input type="text" class="k-textbox"  formControlName="nama_level3" style="width: 100%"/>
+        </div>
+        <div class="form-group" >
+          <label for="level4" class="" >Nama Level 4</label>
+          <input type="text" class="k-textbox"  formControlName="nama_level4" style="width: 100%"/>
+        </div>
+
+        <div class="form-group">
+          <div style="width: 220px; margin: 0 auto;">
+            <button kendoButton [primary]="true" (click)="onSave()" style="margin-right: 5px;width: 100px">Save</button>
+            <button kendoButton style="width: 100px" (click)="onCancel($event)">Cancel</button>
+          </div>
+        </div>
+
+  </form>
+
+  <!--kendo-dialog-actions>
+      <button class="k-button" (click)="onCancel($event)">Cancel</button>
+      <button class="k-button k-primary" [disabled]="!editForm.valid" (click)="onSave($event)">Save</button>
+  </kendo-dialog-actions-->
+</kendo-dialog>
